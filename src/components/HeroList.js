@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
-import { addCharacterById } from '../actions';
+// import { addCharacterById } from '../actions';
+import { removeCharacterById } from '../actions';
 
 
- class CharacterList extends Component {
+ class HeroList extends Component {
     render() {
-        console.log('this.props', this.props);
-        return(
+         return(
             <div>
-                <h2>Characters</h2>
+                <h4>Your Hero Squad</h4>
                 <ul className="list-group">
                 {
-                    this.props.characters.map(character => {
+                    this.props.heroes.map(hero => {
                         return (
-                            <li key={character.id} className="list-group-item">
-                                <div  className="list-item">{character.name}</div>
+                            <li key={hero.id} className="list-group-item">
+                                <div  className="list-item">{hero.name}</div>
                                 <div  className="list-item right-button"
-                                    onClick = {() => this.props.addCharacterById(character.id)}
+                                    onClick = {() => this.props.removeCharacterById(hero.id)}
                                 >
-                                     +
+                                     x
                                  </div>
                             </li>
+
+                        
                         )
                     })
                 }
@@ -34,7 +36,7 @@ import { addCharacterById } from '../actions';
 
 function mapStateToProps(state) {
     return {
-        characters: state.characters
+        heroes: state.heroes
     };
 }
 
@@ -43,4 +45,4 @@ function mapStateToProps(state) {
 
 // }
 
-export default connect(mapStateToProps, { addCharacterById })(CharacterList);
+export default connect(mapStateToProps, { removeCharacterById })(HeroList);
